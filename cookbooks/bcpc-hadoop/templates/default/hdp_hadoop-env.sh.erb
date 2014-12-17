@@ -29,3 +29,20 @@ JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=fals
 export HADOOP_NAMENODE_OPTS="$HADOOP_NAMENODE_OPTS $JMX_OPTS -Dcom.sun.management.jmxremote.port=<%= @nn_jmx_port %>"
 export HADOOP_DATANODE_OPTS="$HADOOP_DATANODE_OPTS $JMX_OPTS -Dcom.sun.management.jmxremote.port=<%= @dn_jmx_port %>"
 <% end %>
+
+export JSVC_HOME=/usr/lib/bigtop-utils
+#HADOOP_OPTS="-Djavax.net.debug=ssl -Dsun.security.krb5.debug=true $HADOOP_OPTS"
+
+export HADOOP_PID_DIR=/var/run/hadoop-hdfs
+export HADOOP_LOG_DIR=/var/log/hadoop-hdfs
+export HADOOP_NAMENODE_USER=hdfs
+export HADOOP_SECONDARYNAMENODE_USER=hdfs
+export HADOOP_DATANODE_USER=hdfs
+export HADOOP_IDENT_STRING=hdfs
+
+<% if node[:bcpc][:hadoop][:enable_kerberos] == true then %>
+export HADOOP_SECURE_DN_USER=hdfs
+export HADOOP_SECURE_DN_PID_DIR=/var/run/hadoop-hdfs
+export HADOOP_SECURE_DN_LOG_DIR=/var/log/hadoop-hdfs
+<% end %>
+
